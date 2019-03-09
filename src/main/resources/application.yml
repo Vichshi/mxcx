@@ -1,0 +1,49 @@
+server:
+  port: 12741
+
+mybatis-plus:
+  mapper-locations: classpath*:mappers/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    
+
+spring:
+  datasource:
+   druid:
+    url: jdbc:mysql://localhost:3306/mxcx?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initial-size: 5
+    max-activite: 100
+    min-idle: 5
+    max-wait: 60000
+    validation-query: SELECT 1
+    
+  quartz:
+    #相关属性配置
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: DefaultQuartzScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            isClustered: false
+            clusterCheckinInterval: 10000
+            useProperties: false
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+    #数据库方式
+    job-store-type: jdbc
+    #初始化表结构
+    #jdbc:
+      #initialize-schema: never
+    
