@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orange.sh.contract.mapper.OrderInfoMapper">
+  <resultMap id="BaseResultMap" type="com.orange.sh.contract.model.OrderInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="contract_number" jdbcType="VARCHAR" property="contractNumber" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_color" jdbcType="VARCHAR" property="productColor" />
+    <result column="total_number" jdbcType="INTEGER" property="totalNumber" />
+    <result column="unprocess_number" jdbcType="INTEGER" property="unprocessNumber" />
+    <result column="unit_price" jdbcType="DECIMAL" property="unitPrice" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="un_settle_amount" jdbcType="DECIMAL" property="unSettleAmount" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, contract_number, order_id, product_name, product_color, total_number, unprocess_number, 
+    unit_price, amount, un_settle_amount, create_date, remark
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.orange.sh.contract.model.OrderInfo">
+    insert into t_order_info (id, contract_number, order_id, 
+      product_name, product_color, total_number, 
+      unprocess_number, unit_price, amount, 
+      un_settle_amount, create_date, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{contractNumber,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{productColor,jdbcType=VARCHAR}, #{totalNumber,jdbcType=INTEGER}, 
+      #{unprocessNumber,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, 
+      #{unSettleAmount,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.orange.sh.contract.model.OrderInfo">
+    insert into t_order_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="contractNumber != null">
+        contract_number,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="productColor != null">
+        product_color,
+      </if>
+      <if test="totalNumber != null">
+        total_number,
+      </if>
+      <if test="unprocessNumber != null">
+        unprocess_number,
+      </if>
+      <if test="unitPrice != null">
+        unit_price,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="unSettleAmount != null">
+        un_settle_amount,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="contractNumber != null">
+        #{contractNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productColor != null">
+        #{productColor,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNumber != null">
+        #{totalNumber,jdbcType=INTEGER},
+      </if>
+      <if test="unprocessNumber != null">
+        #{unprocessNumber,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null">
+        #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="unSettleAmount != null">
+        #{unSettleAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.orange.sh.contract.model.OrderInfo">
+    update t_order_info
+    <set>
+      <if test="contractNumber != null">
+        contract_number = #{contractNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productColor != null">
+        product_color = #{productColor,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNumber != null">
+        total_number = #{totalNumber,jdbcType=INTEGER},
+      </if>
+      <if test="unprocessNumber != null">
+        unprocess_number = #{unprocessNumber,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null">
+        unit_price = #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="unSettleAmount != null">
+        un_settle_amount = #{unSettleAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.orange.sh.contract.model.OrderInfo">
+    update t_order_info
+    set contract_number = #{contractNumber,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_color = #{productColor,jdbcType=VARCHAR},
+      total_number = #{totalNumber,jdbcType=INTEGER},
+      unprocess_number = #{unprocessNumber,jdbcType=INTEGER},
+      unit_price = #{unitPrice,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL},
+      un_settle_amount = #{unSettleAmount,jdbcType=DECIMAL},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

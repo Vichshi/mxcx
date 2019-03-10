@@ -1,10 +1,19 @@
 server:
-  port: 12741
-
-mybatis-plus:
-  mapper-locations: classpath*:mappers/*Mapper.xml
+  port: 8181
+  servlet:
+    context-path: /mxcx
+  
+mybatis:
+  mapper-locations: classpath:mappers/*Mapper.xml
   configuration:
-    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#showSql
+logging:
+  level:
+    com:
+      example:
+        mapper : debug
+    
     
 
 spring:
