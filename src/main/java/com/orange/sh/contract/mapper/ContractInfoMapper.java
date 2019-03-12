@@ -3,6 +3,7 @@ package com.orange.sh.contract.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.orange.sh.contract.dto.response.ContractInfoResp;
 import com.orange.sh.contract.model.ContractInfo;
 
 @Mapper
@@ -22,5 +23,5 @@ public interface ContractInfoMapper {
 	
 	int insertContractInfo(ContractInfo contractInfo);
 	
-	ContractInfo queryContractInfoDetails(@Param("contractNumber") String contractNumber);
+	ContractInfoResp queryContractInfoDetails(@Param("contractNumber") String contractNumber);
 }

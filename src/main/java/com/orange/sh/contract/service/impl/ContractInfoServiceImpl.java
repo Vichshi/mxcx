@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
+import com.orange.sh.contract.dto.response.ContractInfoResp;
 import com.orange.sh.contract.mapper.ContractInfoMapper;
 import com.orange.sh.contract.model.ContractInfo;
 import com.orange.sh.contract.service.ContractInfoService;
@@ -25,10 +26,11 @@ public class ContractInfoServiceImpl implements ContractInfoService {
 	}
 
 	@Override
-	public void queryContractInfoDetails(String contractNumber) {
+	public ContractInfoResp queryContractInfoDetails(String contractNumber) {
 		log.info("合同号：contractNumber = {}",contractNumber);
 		// TODO Auto-generated method stub
-		ContractInfo contractInfoDetails = ContractInfoMapper.queryContractInfoDetails(contractNumber);
-		log.info("查询结果， ==>> {}",JSON.toJSONString(contractInfoDetails));
+		ContractInfoResp resp = ContractInfoMapper.queryContractInfoDetails(contractNumber);
+		log.info("查询结果， ==>> {}",JSON.toJSONString(resp));
+		return resp;
 	}
 }

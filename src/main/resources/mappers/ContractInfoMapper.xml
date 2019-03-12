@@ -118,13 +118,38 @@
     from t_contract_info
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectOrderInfoByContractNumber" parameterType="java.lang.String" resultType="com.orange.sh.contract.dto.response.OrderInfoResp">
+	SELECT
+		contract_number contractNumber,
+		order_id orderId,
+		product_name productName,
+		product_color productColor,
+		total_number totalNumber,
+		unprocess_number unprocessNumber,
+		unit_price unitPrice,
+		amount,
+		un_settle_amount unSettleAmount,
+		create_date createDate,
+		remark
+	FROM
+		t_order_info
+	WHERE
+		contract_number = #{contract_number,jdbcType=VARCHAR}
+  </select>
 
+	<resultMap type="com.orange.sh.contract.dto.response.ContractInfoResp" id="contractInfoMap">
+	    <result column="contract_number" jdbcType="VARCHAR" property="contractNumber" />
+	    <result column="customer_info" jdbcType="VARCHAR" property="customerInfo" />
+	    <result column="phone" jdbcType="VARCHAR" property="phone" />
+	    <result column="sign_date" jdbcType="TIMESTAMP" property="signDate" />
+	    <result column="remark" jdbcType="VARCHAR" property="remark" />
+	    <collection property="orderInfos" column="contract_number" select="selectOrderInfoByContractNumber" />
+	</resultMap>
 
-	<select id="queryContractInfoDetails" resultMap="BaseResultMap">
+	<select id="queryContractInfoDetails" resultMap="contractInfoMap">
 		SELECT
-			id,
 			contract_number,
-			title,
 			customer_info,
 			phone,
 			sign_date,

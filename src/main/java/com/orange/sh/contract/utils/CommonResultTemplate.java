@@ -2,7 +2,7 @@ package com.orange.sh.contract.utils;
 
 import org.slf4j.LoggerFactory;
 
-import com.orange.sh.contract.dto.CommonResult;
+import com.orange.sh.common.CommonResult;
 import com.orange.sh.contract.type.ErrorCode;
 
 public class CommonResultTemplate {
