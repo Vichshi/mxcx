@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.orange.sh.common.CommonResult;
 import com.orange.sh.contract.dto.response.DemoDto;
 import com.orange.sh.contract.service.OrderInfoService;
+import com.orange.sh.task.AsyncTaskServer;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,13 +26,18 @@ public class OrderInfoController {
 	@Value("${url}")
 	private String url;
 	
+	@Autowired
+	private AsyncTaskServer asyncTaskServer;
+	
 	@GetMapping("/test")
 	public CommonResult<DemoDto> test(HttpServletRequest request){
+		asyncTaskServer.startTask();
 		log.info(request.getParameter("content"));
 		log.warn("加载文件内容：url -> {}",url);
 		DemoDto data = new DemoDto();
 		data.setUsername("vich");
 		data.setPassword("123456");
+		asyncTaskServer.startTask();
 		return CommonResult.success(data);
 	}
 }

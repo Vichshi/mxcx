@@ -24,4 +24,10 @@ public interface ContractInfoMapper {
 	int insertContractInfo(ContractInfo contractInfo);
 	
 	ContractInfoResp queryContractInfoDetails(@Param("contractNumber") String contractNumber);
+
+	/**
+	 * 根据合同号更新基本信息
+	 * @param info
+	 */
+	int updateByNumber(@Param("info") ContractInfo info);
 }
