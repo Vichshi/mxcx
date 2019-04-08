@@ -14,5 +14,7 @@ public interface ContractInfoService {
 	 * @param info
 	 */
 	void updateContractInfo(ContractInfo info);
+
+	void delContractByNumber(String number);
 	
 }

@@ -13,7 +13,7 @@ import com.orange.sh.contract.service.ContractInfoService;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
+@Slf4j	
 public class ContractInfoServiceImpl implements ContractInfoService {
 	
 	@Autowired
@@ -41,6 +41,11 @@ public class ContractInfoServiceImpl implements ContractInfoService {
 			throw new BussinessException(1001,"合同基本信息修改失败");
 		}
 
+	}
+
+	@Override
+	public void delContractByNumber(String number) {
+		
 	}
 	
 }
