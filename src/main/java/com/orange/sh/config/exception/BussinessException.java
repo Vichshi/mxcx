@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BessinessException extends RuntimeException implements Serializable{
+public class BussinessException extends RuntimeException implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -15,18 +15,18 @@ public class BessinessException extends RuntimeException implements Serializable
 	
 	private String errorMessage;
 	
-	public BessinessException(int errorCode,String errorMessage) {
+	public BussinessException(int errorCode,String errorMessage) {
 		super("错误代码：[" + errorCode + "] 错误信息："+errorMessage);
 		this.setErrorCode(errorCode);
 		this.setErrorMessage(errorMessage);;
 	}
 
-	public BessinessException(int errorCode) {
+	public BussinessException(int errorCode) {
 		super(String.valueOf(errorCode));
 		this.errorCode = errorCode;
 	}
 
-	public BessinessException(int errorCode, String errorMessage,Throwable throwable) {
+	public BussinessException(int errorCode, String errorMessage,Throwable throwable) {
 		super("错误代码：[" + errorCode + "] 错误信息："+errorMessage,throwable);
 		this.errorCode = errorCode;
 		this.errorMessage = errorMessage;

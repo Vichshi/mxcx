@@ -1,129 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.orange.sh.contract.mapper.ContractInfoMapper">
+<mapper
+	namespace="com.orange.sh.contract.mapper.ContractInfoMapper">
 
-<resultMap id="BaseResultMap" type="com.orange.sh.contract.model.ContractInfo">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="contract_number" jdbcType="VARCHAR" property="contractNumber" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="customer_info" jdbcType="VARCHAR" property="customerInfo" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="sign_date" jdbcType="TIMESTAMP" property="signDate" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, contract_number, title, customer_info, phone, sign_date, remark
-  </sql>
- 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_contract_info
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.orange.sh.contract.model.ContractInfo">
-    insert into t_contract_info (id, contract_number, title, 
-      customer_info, phone, sign_date, 
-      remark)
-    values (#{id,jdbcType=INTEGER}, #{contractNumber,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{customerInfo,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{signDate,jdbcType=TIMESTAMP}, 
-      #{remark,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.orange.sh.contract.model.ContractInfo">
-    insert into t_contract_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="contractNumber != null">
-        contract_number,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="customerInfo != null">
-        customer_info,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="signDate != null">
-        sign_date,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="contractNumber != null">
-        #{contractNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="customerInfo != null">
-        #{customerInfo,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="signDate != null">
-        #{signDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.orange.sh.contract.model.ContractInfo">
-    update t_contract_info
-    <set>
-      <if test="contractNumber != null">
-        contract_number = #{contractNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="customerInfo != null">
-        customer_info = #{customerInfo,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="signDate != null">
-        sign_date = #{signDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.orange.sh.contract.model.ContractInfo">
-    update t_contract_info
-    set contract_number = #{contractNumber,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
-      customer_info = #{customerInfo,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      sign_date = #{signDate,jdbcType=TIMESTAMP},
-      remark = #{remark,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+	<resultMap id="BaseResultMap"
+		type="com.orange.sh.contract.model.ContractInfo">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="contract_number" jdbcType="VARCHAR"
+			property="contractNumber" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="customer_info" jdbcType="VARCHAR"
+			property="customerInfo" />
+		<result column="phone" jdbcType="VARCHAR" property="phone" />
+		<result column="sign_date" jdbcType="TIMESTAMP"
+			property="signDate" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, contract_number, title, customer_info, phone, sign_date, remark
+	</sql>
 
-  
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_contract_info
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  
-  <select id="selectOrderInfoByContractNumber" parameterType="java.lang.String" resultType="com.orange.sh.contract.dto.response.OrderInfoResp">
-	SELECT
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from t_contract_info
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert"
+		parameterType="com.orange.sh.contract.model.ContractInfo">
+		insert into t_contract_info (id, contract_number, title,
+		customer_info, phone, sign_date,
+		remark)
+		values (#{id,jdbcType=INTEGER}, #{contractNumber,jdbcType=VARCHAR},
+		#{title,jdbcType=VARCHAR},
+		#{customerInfo,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{signDate,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.orange.sh.contract.model.ContractInfo">
+		insert into t_contract_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="contractNumber != null">
+				contract_number,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="customerInfo != null">
+				customer_info,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="signDate != null">
+				sign_date,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="contractNumber != null">
+				#{contractNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="customerInfo != null">
+				#{customerInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="signDate != null">
+				#{signDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.orange.sh.contract.model.ContractInfo">
+		update t_contract_info
+		<set>
+			<if test="contractNumber != null">
+				contract_number = #{contractNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="customerInfo != null">
+				customer_info = #{customerInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="signDate != null">
+				sign_date = #{signDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.orange.sh.contract.model.ContractInfo">
+		update t_contract_info
+		set contract_number = #{contractNumber,jdbcType=VARCHAR},
+		title = #{title,jdbcType=VARCHAR},
+		customer_info = #{customerInfo,jdbcType=VARCHAR},
+		phone = #{phone,jdbcType=VARCHAR},
+		sign_date = #{signDate,jdbcType=TIMESTAMP},
+		remark = #{remark,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_contract_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectOrderInfoByContractNumber"
+		parameterType="java.lang.String"
+		resultType="com.orange.sh.contract.dto.response.OrderInfoResp">
+		SELECT
 		contract_number contractNumber,
 		order_id orderId,
-		product_name productName,
+		product_name
+		productName,
 		product_color productColor,
 		total_number totalNumber,
 		unprocess_number unprocessNumber,
@@ -132,43 +147,73 @@
 		un_settle_amount unSettleAmount,
 		create_date createDate,
 		remark
-	FROM
+		FROM
 		t_order_info
-	WHERE
+		WHERE
 		contract_number = #{contract_number,jdbcType=VARCHAR}
-  </select>
+	</select>
 
-	<resultMap type="com.orange.sh.contract.dto.response.ContractInfoResp" id="contractInfoMap">
-	    <result column="contract_number" jdbcType="VARCHAR" property="contractNumber" />
-	    <result column="customer_info" jdbcType="VARCHAR" property="customerInfo" />
-	    <result column="phone" jdbcType="VARCHAR" property="phone" />
-	    <result column="sign_date" jdbcType="TIMESTAMP" property="signDate" />
-	    <result column="remark" jdbcType="VARCHAR" property="remark" />
-	    <collection property="orderInfos" column="contract_number" select="selectOrderInfoByContractNumber" />
+	<resultMap
+		type="com.orange.sh.contract.dto.response.ContractInfoResp"
+		id="contractInfoMap">
+		<result column="contract_number" jdbcType="VARCHAR"
+			property="contractNumber" />
+		<result column="customer_info" jdbcType="VARCHAR"
+			property="customerInfo" />
+		<result column="phone" jdbcType="VARCHAR" property="phone" />
+		<result column="sign_date" jdbcType="TIMESTAMP"
+			property="signDate" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<collection property="orderInfos" column="contract_number"
+			select="selectOrderInfoByContractNumber" />
 	</resultMap>
 
-	<select id="queryContractInfoDetails" resultMap="contractInfoMap">
+	<select id="queryContractInfoDetails"
+		resultMap="contractInfoMap">
 		SELECT
-			contract_number,
-			customer_info,
-			phone,
-			sign_date,
-			remark
+		contract_number,
+		customer_info,
+		phone,
+		sign_date,
+		remark
 		FROM
-			t_contract_info
+		t_contract_info
 		WHERE
-			contract_number = #{contractNumber,jdbcType=VARCHAR}
+		contract_number = #{contractNumber,jdbcType=VARCHAR}
 	</select>
-	
-	<insert id="insertContractInfo" parameterType="com.orange.sh.contract.model.ContractInfo">
-		INSERT INTO t_contract_info 
-			( contract_number, title, customer_info, phone, sign_date )
+
+	<insert id="insertContractInfo"
+		parameterType="com.orange.sh.contract.model.ContractInfo">
+		INSERT INTO t_contract_info
+		( contract_number, title, customer_info, phone, sign_date )
 		VALUES
-			(#{contractNumber,jdbcType=VARCHAR},
-			 #{title,jdbcType=VARCHAR},
-			 #{customerInfo,jdbcType=VARCHAR},
-			 #{phone,jdbcType=VARCHAR},
-			 #{signDate}
-			 )
+		(#{contractNumber,jdbcType=VARCHAR},
+		#{title,jdbcType=VARCHAR},
+		#{customerInfo,jdbcType=VARCHAR},
+		#{phone,jdbcType=VARCHAR},
+		#{signDate}
+		)
 	</insert>
+
+	<update id="updateByNumber">
+		update t_contract_info
+		<set>
+			<if test="info.title != null">
+				title = #{info.title,jdbcType=VARCHAR},
+			</if>
+			<if test="info.customerInfo != null">
+				customer_info = #{info.customerInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="info.phone != null">
+				phone = #{info.phone,jdbcType=VARCHAR},
+			</if>
+			<if test="info.signDate != null">
+				sign_date = #{info.signDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="info.remark != null">
+				remark = #{info.remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where contract_number = #{info.contractNumber,jdbcType=INTEGER}
+	</update>
 </mapper>

@@ -9,35 +9,58 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orange.sh.common.CommonResult;
+import com.orange.sh.common.annotation.SystemLog;
 import com.orange.sh.contract.dto.response.ContractInfoResp;
 import com.orange.sh.contract.model.ContractInfo;
 import com.orange.sh.contract.service.ContractInfoService;
 import com.orange.sh.contract.utils.AESUtil;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+
+@Api(tags="合同信息服务")
 @RestController
 @RequestMapping("/api/contract-info")
+@SuppressWarnings(value="rawtypes")
 public class ContractInfoController {
 	
 	@Autowired
 	private ContractInfoService contractInfoService;
 	
+	@ApiOperation(value="新增合同记录",notes="新增一条合同记录")
 	@PostMapping
+	@SystemLog(description="新增合同记录")
 	public CommonResult createContractInfo(@RequestBody ContractInfo info) {
 		contractInfoService.save(info);
 		return CommonResult.success();
 	}
 	
+	@SystemLog(description="查询合同订单详情")
+	@ApiOperation(value="查询合同订单详情",notes="根据合同单号")
 	@GetMapping("/{number}")
-	public CommonResult<ContractInfoResp> queryDetails(@PathVariable("number") String contractInfo) {
-		ContractInfoResp resp = contractInfoService.queryContractInfoDetails(contractInfo);
+	@ApiImplicitParam(value="number",paramType="path",required=true,dataType="string")
+	public CommonResult<ContractInfoResp> queryDetails(@PathVariable("number") String number) {
+		ContractInfoResp resp = contractInfoService.queryContractInfoDetails(number);
 		return CommonResult.success(resp);
 	}
 	
+	@ApiOperation(value="更新合同基本信息",notes="根据合同id更新")
+	@PutMapping
+	@SystemLog(description="更新合同基本信息")
+	public CommonResult updateContractInfo(@RequestBody ContractInfo info) {
+		contractInfoService.updateContractInfo(info);
+		return CommonResult.success();
+	}
+	
+	@ApiOperation(value="数据加密")
+	@SuppressWarnings("static-access")
 	@PostMapping("/auth/encrypt")
 	public CommonResult encryptData(@RequestBody Map<String,Object> params) {
 		//Map<String, String[]> parameterMap = request.getParameterMap();

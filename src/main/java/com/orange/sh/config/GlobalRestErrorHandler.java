@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.orange.sh.common.CommonResult;
-import com.orange.sh.config.exception.BessinessException;
+import com.orange.sh.config.exception.BussinessException;
 import com.orange.sh.contract.type.ErrorCode;
 
 /**
@@ -31,9 +31,9 @@ public class GlobalRestErrorHandler {
 
 
     @ResponseBody
-    @ExceptionHandler(BessinessException.class)
+    @ExceptionHandler(BussinessException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public CommonResult processInvalidTokenException(BessinessException e) {
+    public CommonResult processInvalidTokenException(BussinessException e) {
         return new CommonResult(e.getErrorCode(),e.getMessage(),null);
     }
 
