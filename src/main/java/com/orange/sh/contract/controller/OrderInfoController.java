@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +26,6 @@ public class OrderInfoController {
 	
 	@Value("${url}")
 	private String url;
-	
 	@Autowired
 	private AsyncTaskServer asyncTaskServer;
 	
@@ -33,11 +33,7 @@ public class OrderInfoController {
 	public CommonResult<DemoDto> test(HttpServletRequest request){
 		asyncTaskServer.startTask();
 		log.info(request.getParameter("content"));
-		log.warn("加载文件内容：url -> {}",url);
-		DemoDto data = new DemoDto();
-		data.setUsername("vich");
-		data.setPassword("123456");
 		asyncTaskServer.startTask();
-		return CommonResult.success(data);
+		return CommonResult.success();
 	}
 }

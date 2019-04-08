@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -15,7 +16,6 @@ import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
@@ -24,11 +24,10 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.junit.Test;
-import org.springframework.beans.BeanUtils;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
@@ -37,9 +36,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.mchange.v2.beans.BeansUtils;
 
-import mxcx.com.orange.vo.ResultMap;
+import mxcx.com.orange.vo.JsonConvertVo;
+import mxcx.com.orange.vo.OpenApiResult;
 import mxcx.com.orange.vo.UserDto;
 
 public class HttpClientTest {
@@ -48,6 +47,8 @@ public class HttpClientTest {
 	public void test() {
 
 		String url = "http://gzjjwx.gzjd.gov.cn/sandbox/GzjjPingAnXcxApiServer/PA/SynNotSimpleCase";
+		long in = System.currentTimeMillis()/1000;
+		System.out.println(in);
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -59,12 +60,15 @@ public class HttpClientTest {
 		params.add("jqsj", "2019-03-06 14:47:00");
 		params.add("mapx", "string");
 		params.add("mapy", "string");
-		params.add("signature", "0509b85ebb1a7272dbcac7fa78662d32");
-		params.add("ssdd", "深圳市公安局交通警察支队南山大队");
-		params.add("timestamp", "1552040662");
+		params.add("signature", "9f58206f17c015ea8ef94309b59d4d7e");
+		params.add("ssdd", "44011518");
+		params.add("timestamp", "1553661702");
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
-		ResponseEntity<Object> response = restTemplate.postForEntity(url, entity, Object.class);
-		System.out.println(response.getBody());
+		ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
+		String json = response.getBody();
+		System.out.println(json);
+		JsonConvertVo<String> vo = JSON.parseObject(json,new TypeReference<JsonConvertVo<String>>(){});
+		System.out.println(vo.toString());
 	}
 
 	@Test
@@ -249,28 +253,45 @@ public class HttpClientTest {
 		System.out.println(map);
 	}
 
+	
+	
 	@Test
 	public void testOpenApi() {
-		RestTemplate restTemplate = new RestTemplate();
-		String url = "http://127.0.0.1:8181/mxcx/contract-info/test?content={content}";
+		RestTemplate restTempalte = new RestTemplate();
+		String url ="https://test-api.pingan.com.cn:20443/open/appsvr/property/marketOpenApi/getCreditAccountAndCheckBlacklist";
+		Map<String, Object> params = new HashMap<>();
+		params.put("access_token", "7B7757BCB6584DF79BB1ED01B1EB2575");
+		params.put("request_id", 123566);
+		params.put("vin", "1");
+		params.put("certificateNo", "44030119806062026");
+		params.put("carMark", "湘APX001");
 		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity http = new HttpEntity<>(headers); 
-		/*ResponseEntity<String> postForEntity = restTemplate.postForEntity(url, http, String.class);
-		String json = postForEntity.getBody();
+		/*List<MediaType> acceptableMediaTypes = new ArrayList<>();
+		acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
+		headers.setAccept(acceptableMediaTypes);*/
+		headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+		HttpEntity<String> entity = new HttpEntity<>(null,headers);
+		ResponseEntity<String> exchange = restTempalte.exchange(url+"?access_token={access_token}&request_id={request_id}&certificateNo={certificateNo}&carMark={carMark}", HttpMethod.GET, entity, String.class,params);
+//		ResponseEntity<String> exchange = restTempalte.getForEntity(url+"?access_token={access_token}&request_id={request_id}&vin={vin}&certificateNo={certificateNo}", String.class,params);&vin={vin}
+		String json = exchange.getBody();
 		System.out.println(json);
-		ResultMap<UserDto> result = JSON.parseObject(json, new TypeReference<ResultMap<UserDto>>() {});
-		UserDto dto = result.getData();
-		System.out.println(dto.getUsername()+dto.getPassword());*/
-		Map<String, String> params = new HashMap<>();
-		params.put("content", "Accept content");
-		ResponseEntity<String> response = restTemplate.getForEntity(url, String.class, params);
-		String json = response.getBody();
-		System.out.println(json);
-		ResultMap<UserDto> result = JSON.parseObject(json, new TypeReference<ResultMap<UserDto>>() {});
-		UserDto dto = result.getData();
-		System.out.println(dto.getUsername()+dto.getPassword());
-
+		OpenApiResult reuslt = JSON.parseObject(json, OpenApiResult.class);
+//		JSONObject jsonObject = JSONObject.parseObject(json);
+//		System.out.println(jsonObject.getString("data"));
+		
+		
 	}
 
+	@Test
+	public void test99() {
+BigDecimal b=new BigDecimal("100.01");
+		
+		BigDecimal a=b.multiply(new BigDecimal(100));//乘以100(单位：分)
+		System.out.println(b.intValue());
+		System.out.println(b);
+		
+		System.out.println(a.intValue());
+		System.out.println(a);
+
+	}
 }
