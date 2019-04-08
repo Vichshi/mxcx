@@ -1,10 +1,9 @@
 package com.orange.sh.contract.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,14 +23,13 @@ public class OrderInfoController {
 	
 	@Value("${url}")
 	private String url;
-	
-	@GetMapping("/test")
-	public CommonResult<DemoDto> test(HttpServletRequest request){
-		log.info(request.getParameter("content"));
+	@GetMapping("/test/{token}")
+	public CommonResult<DemoDto> test(@PathVariable("token") String token){
 		log.warn("加载文件内容：url -> {}",url);
+		log.warn("token内容：token -> {}",token);
 		DemoDto data = new DemoDto();
 		data.setUsername("vich");
-		data.setPassword("123456");
+		data.setPassword(token+"%+");
 		return CommonResult.success(data);
 	}
 }
