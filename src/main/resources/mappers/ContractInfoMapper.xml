@@ -216,4 +216,9 @@
 		</set>
 		where contract_number = #{info.contractNumber,jdbcType=INTEGER}
 	</update>
+	<select id="selectRecords" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_contract_info
+	</select>
 </mapper>

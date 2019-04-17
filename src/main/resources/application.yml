@@ -8,11 +8,7 @@ mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 #showSql
-logging:
-  level:
-    com:
-      example:
-        mapper : debug
+
     
     
 

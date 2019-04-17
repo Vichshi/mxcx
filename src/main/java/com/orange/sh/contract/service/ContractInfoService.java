@@ -1,5 +1,6 @@
 package com.orange.sh.contract.service;
 
+import com.github.pagehelper.PageInfo;
 import com.orange.sh.contract.dto.response.ContractInfoResp;
 import com.orange.sh.contract.model.ContractInfo;
 
@@ -14,5 +15,13 @@ public interface ContractInfoService {
 	 * @param info
 	 */
 	void updateContractInfo(ContractInfo info);
+
+	/**
+	 * 分页查询列表
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 */
+	PageInfo<ContractInfo> queryRecords(int pageNum, int pageSize);
 	
 }

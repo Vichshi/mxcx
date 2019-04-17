@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.PageInfo;
 import com.orange.sh.common.CommonResult;
 import com.orange.sh.common.annotation.SystemLog;
 import com.orange.sh.contract.dto.response.ContractInfoResp;
@@ -59,6 +61,13 @@ public class ContractInfoController {
 		return CommonResult.success();
 	}
 	
+
+	@GetMapping("/records")
+	public CommonResult<PageInfo> queryContractRecords(@RequestParam("pageNum") int pageNum,@RequestParam("pageSize") int pageSize){
+		PageInfo<ContractInfo> data = contractInfoService.queryRecords(pageNum,pageSize);
+		return CommonResult.success(data);
+	}
+	
 	@ApiOperation(value="数据加密")
 	@SuppressWarnings("static-access")
 	@PostMapping("/auth/encrypt")
@@ -68,6 +77,7 @@ public class ContractInfoController {
 		return new CommonResult().success(data);
 		
 	}
+	
 
 	private Map<String, String> encryptData1(Map<String, Object> parameterMap) {
 		 Map<String, String> returnMap = new HashMap<String, String>();

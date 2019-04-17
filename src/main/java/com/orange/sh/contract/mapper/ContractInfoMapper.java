@@ -1,5 +1,7 @@
 package com.orange.sh.contract.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,4 +32,10 @@ public interface ContractInfoMapper {
 	 * @param info
 	 */
 	int updateByNumber(@Param("info") ContractInfo info);
+
+	/**
+	 * 查询所有记录
+	 * @return
+	 */
+	List<ContractInfo> selectRecords();
 }
