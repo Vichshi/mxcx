@@ -19,7 +19,7 @@ import com.orange.sh.contract.service.ContractInfoService;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
+@Slf4j	
 public class ContractInfoServiceImpl implements ContractInfoService {
 	
 	@Autowired
@@ -65,6 +65,13 @@ public class ContractInfoServiceImpl implements ContractInfoService {
 		PageHelper.startPage(pageNum, pageSize);
 		List<ContractInfo> list = ContractInfoMapper.selectRecords();
 		return new PageInfo<ContractInfo>(list);
+		
+	}
+
+	@Override
+	public void delContractByNumber(String number) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

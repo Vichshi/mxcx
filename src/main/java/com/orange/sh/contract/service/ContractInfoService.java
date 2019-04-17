@@ -23,5 +23,6 @@ public interface ContractInfoService {
 	 * @return
 	 */
 	PageInfo<ContractInfo> queryRecords(int pageNum, int pageSize);
+	void delContractByNumber(String number);
 	
 }
