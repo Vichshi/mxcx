@@ -105,5 +105,11 @@ public class ContractInfoController {
 		}
 		return returnMap;
 	}
+	
+	@PostMapping("/testException")
+	public CommonResult test() {
+		contractInfoService.test();
+		return CommonResult.success();
+	}
 
 }

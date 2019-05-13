@@ -15,6 +15,7 @@ import com.orange.sh.contract.dto.response.PageBeanDto;
 import com.orange.sh.contract.mapper.ContractInfoMapper;
 import com.orange.sh.contract.model.ContractInfo;
 import com.orange.sh.contract.service.ContractInfoService;
+import com.orange.sh.contract.service.OrderInfoService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +25,8 @@ public class ContractInfoServiceImpl implements ContractInfoService {
 	
 	@Autowired
 	private ContractInfoMapper ContractInfoMapper;
+	@Autowired
+	private OrderInfoService orderInfoService;
 	
 	@Override
 	public void save(ContractInfo contractInfo) {
@@ -72,6 +75,17 @@ public class ContractInfoServiceImpl implements ContractInfoService {
 	public void delContractByNumber(String number) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void test(){
+		// TODO Auto-generated method stub
+		this.throwBusExp();
+	}
+
+	private void throwBusExp(){
+		
+		orderInfoService.test();
 	}
 	
 }

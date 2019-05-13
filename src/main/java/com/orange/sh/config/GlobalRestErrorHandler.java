@@ -32,7 +32,7 @@ public class GlobalRestErrorHandler {
 
     @ResponseBody
     @ExceptionHandler(BussinessException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ResponseStatus(HttpStatus.OK)
     public CommonResult processInvalidTokenException(BussinessException e) {
         return new CommonResult(e.getErrorCode(),e.getMessage(),null);
     }
